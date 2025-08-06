@@ -6,6 +6,12 @@ from chatbot_core import ask_gpt, handle_command, load_config, load_memory, save
 app = Flask(__name__)
 CORS(app)  # allow frontend (Angular) to call API from a different domain
 
+# Ensure defaults exist on startup
+config = load_config()
+if not config.get("bot_role") or not config.get("theme"):
+    from chatbot_core import default_role
+    save_config(config.get("bot_role", default_role), config.get("theme", "Dark"))
+
 @app.route("/chat", methods=["POST"])
 def chat():
     """Receive a message and return the chatbot's reply."""
@@ -28,14 +34,20 @@ def history():
     config = load_config()
     memory = load_memory()
 
+    # Force Dark theme by default unless explicitly set to Light or Auto
+    theme = config.get("theme", "Dark")
+    if theme.lower() not in ["dark", "light", "auto"]:
+        theme = "Dark"
+
     # Only send user/assistant messages for UI
     chat_history = [(m["role"], m["content"]) for m in memory if m["role"] in ["user", "assistant"]]
 
     return jsonify({
         "role": config["bot_role"],
-        "theme": config["theme"],
+        "theme": theme,
         "history": chat_history
     })
+
 
 @app.route("/theme", methods=["POST"])
 def set_theme():
@@ -58,7 +70,6 @@ def set_theme():
         "theme": new_theme
     })
 
-    
 @app.route("/clear", methods=["POST"])
 def clear():
     """Clear chat history both in memory and on disk."""
@@ -74,13 +85,12 @@ def reset():
     from chatbot_core import save_memory, save_config, default_role
     import chatbot_core
     chatbot_core.bot_role = default_role
-    save_config(default_role, "Light")
+    save_config(default_role, "Dark")  # Default theme now Dark
     save_memory([{"role": "system", "content": default_role}])
     return jsonify({
         "message": "🔄 Chat history and AI role have been reset to default.",
         "role": default_role
     }), 200
-
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))  # Use Render's assigned port
