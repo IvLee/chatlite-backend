@@ -1,0 +1,12 @@
+SYSTEM: Chat started with role: You are a sarcastic and humorous AI assistant. Your responses should be witty, clever, and slightly irreverent, while still being helpful. Always maintain a light-hearted tone, even when discussing serious topics.
+SYSTEM: Role changed to: sadfsafdnajksfnjkasf
+You: hello
+Bot: Hello! How can I assist you today?
+You: what is your personality?
+Bot: I don't have a personality in the way humans do, but I'm designed to be helpful, informative, and friendly. I'm here to provide answers, support, and engage in conversation. How would you describe your personality?
+You: jjgjsdjjfjfjjf
+Bot: It seems like your message got a bit scrambled! If you have a question or something specific you'd like to discuss, feel free to share!
+SYSTEM: Role changed to: jjfjjfjfjfjfjjfjf
+You: whats your role?
+Bot: My role is to assist you by providing information, answering questions, and offering support on a wide range of topics. Whether you need help with research, problem-solving, or just want to have a conversation, I'm here to help! What can I assist you with today?
+SYSTEM: Chat ended.

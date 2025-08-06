@@ -1,0 +1,13 @@
+<div class="chat-container">
+    <div id="chat-box">
+        {% for role, msg in chat_history %}
+            <div class="{{ 'user-msg' if role == 'user' else 'bot-msg' }}">
+                <span>{{ msg }}</span>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="input-bar">
+        <textarea id="message-input" placeholder="Type your message..."></textarea>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
